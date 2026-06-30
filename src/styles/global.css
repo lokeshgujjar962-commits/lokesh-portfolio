@@ -1,0 +1,55 @@
+:root {
+  --color-bg: #fefcf8;
+  --color-grid: rgba(138, 205, 216, 0.3);
+  --color-dark-blue: #1D3A5F;
+  --color-teal: #8ACDD8;
+  --color-beige: #FDF8ED;
+  --color-brown: #69462A;
+  --color-accent: #2F6EF5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  /* Create the notebook grid pattern */
+  background-image: 
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center center;
+  font-family: 'Mali', cursive;
+  color: var(--color-dark-blue);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Shrikhand', cursive;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reusable playful shadow class */
+.playful-shadow {
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+.pill {
+  display: inline-block;
+  background-color: var(--color-teal);
+  color: white;
+  padding: 5px 20px;
+  border-radius: 50px;
+  font-family: 'Shrikhand', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
