@@ -1,8 +1,10 @@
 ---
 import '../styles/global.css';
+import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import WorkGallery from '../components/WorkGallery.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <html lang="en">
@@ -11,21 +13,23 @@ import WorkGallery from '../components/WorkGallery.astro';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>David K. Thio | Portfolio</title>
+    <title>Prem Shankar | Portfolio</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <Header />
     <main class="portfolio-main">
       <Hero />
       <About />
       <WorkGallery />
     </main>
+    <Footer />
 
-    <!-- GSAP Setup -->
+    <!-- GSAP Animations -->
     <script>
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -33,99 +37,116 @@ import WorkGallery from '../components/WorkGallery.astro';
       gsap.registerPlugin(ScrollTrigger);
 
       // Hero Animations
-      gsap.from(".hero-title", {
-        y: -100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "elastic.out(1, 0.5)",
-        delay: 0.2
-      });
-
-      gsap.from(".name-pill", {
-        scale: 0,
-        opacity: 0,
-        duration: 1,
-        ease: "back.out(1.7)",
-        delay: 0.8
-      });
-
-      // Stagger collage pieces
-      gsap.from(".collage-piece", {
-        scale: 0,
-        rotation: 180,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "back.out(1.2)",
-      });
-
-      // Floating animation for collage pieces
-      gsap.to(".cp-1, .cp-3", {
-        y: 15,
-        rotation: "+=2",
-        duration: 2.5,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut"
-      });
-
-      gsap.to(".cp-2, .cp-4", {
-        y: -15,
-        rotation: "-=2",
-        duration: 3,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-        delay: 0.5
-      });
-
-      // About Section Scroll Animation
-      gsap.from(".avatar-placeholder", {
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top 80%",
-        },
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out"
-      });
-
-      gsap.from(".about-content", {
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top 80%",
-        },
-        x: 100,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out"
-      });
-
-      // Gallery Cards Scroll Animation
-      gsap.from(".gallery-card", {
-        scrollTrigger: {
-          trigger: ".gallery-section",
-          start: "top 70%",
-        },
+      const heroTl = gsap.timeline();
+      heroTl.from(".title-solid, .title-outline", {
         y: 100,
         opacity: 0,
-        rotationX: 0,
-        rotationY: 0,
-        stagger: 0.2,
         duration: 1,
-        ease: "back.out(1.2)"
-      });
-
-      gsap.from(".gallery-title", {
-        scrollTrigger: {
-          trigger: ".gallery-section",
-          start: "top 80%",
-        },
-        scale: 0,
+        stagger: 0.1,
+        ease: "power4.out",
+        delay: 0.2
+      })
+      .from(".center-portrait", {
+        scale: 0.8,
         opacity: 0,
         duration: 1,
-        ease: "elastic.out(1, 0.5)"
+        ease: "power3.out"
+      }, "-=0.5")
+      .from(".greeting, .hero-bottom, .hero-actions", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      }, "-=0.5");
+
+      // About Animations
+      gsap.from(".huge-text", {
+        scrollTrigger: {
+          trigger: ".about-section",
+          start: "top 70%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      });
+
+      gsap.from(".bio-text, .section-heading, .contact-link", {
+        scrollTrigger: {
+          trigger: ".about-right",
+          start: "top 75%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+
+      gsap.from(".skills-list li", {
+        scrollTrigger: {
+          trigger: ".skills-container",
+          start: "top 80%",
+        },
+        x: -30,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+
+      // Work Gallery Animations
+      gsap.from(".section-title, .section-subtitle", {
+        scrollTrigger: {
+          trigger: ".projects-section",
+          start: "top 80%",
+        },
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out"
+      });
+
+      gsap.from(".project-card", {
+        scrollTrigger: {
+          trigger: ".projects-grid",
+          start: "top 75%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
+      });
+
+      // Footer Animations (Targeting data-gsap attributes in Footer)
+      gsap.utils.toArray('[data-gsap="fade-up"]').forEach((el: any) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+          },
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          delay: parseFloat(el.dataset.delay || "0"),
+          ease: "power3.out"
+        });
+      });
+
+      gsap.utils.toArray('[data-gsap="fade-in"]').forEach((el: any) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+          },
+          opacity: 0,
+          duration: 1,
+          delay: parseFloat(el.dataset.delay || "0"),
+          ease: "power2.out"
+        });
       });
     </script>
   </body>

@@ -1,0 +1,82 @@
+---
+---
+
+<header class="header">
+  <div class="logo">
+    <a href="/">Prem.</a>
+  </div>
+  
+  <nav class="nav-links">
+    <a href="#design">Design</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <span class="lang-switch">
+      <a href="#" class="active">EN</a>
+    </span>
+  </nav>
+
+  <div class="contact">
+    <a href="mailto:hello@prem.in" class="btn">hello@prem.in</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    position: sticky;
+    top: 0;
+    background-color: var(--color-bg);
+    z-index: 100;
+  }
+
+  .logo a {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+  }
+
+  .logo a::after {
+    content: '.';
+    color: #ff3366; /* Small accent color from original design */
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #000;
+  }
+
+  .lang-switch {
+    margin-left: 2rem;
+  }
+
+  .lang-switch a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    color: #000;
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .nav-links {
+      gap: 1.5rem;
+    }
+    .lang-switch {
+      margin-left: 0;
+    }
+  }
+</style>
