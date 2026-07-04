@@ -21,6 +21,7 @@ import Footer from '../components/Footer.astro';
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <div class="custom-cursor"></div>
     <Header />
     <main class="portfolio-main">
       <Hero />
@@ -36,13 +37,28 @@ import Footer from '../components/Footer.astro';
 
       gsap.registerPlugin(ScrollTrigger);
 
-      // Hero Animations
+      // Custom Cursor Logic
+      const cursor = document.querySelector('.custom-cursor');
+      if (cursor) {
+        document.addEventListener('mousemove', (e) => {
+          (cursor as HTMLElement).style.left = e.clientX + 'px';
+          (cursor as HTMLElement).style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, .btn, button').forEach(el => {
+          el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+          el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+      }
+
+      // Improved Hero Animations
       const heroTl = gsap.timeline();
       heroTl.from(".title-solid, .title-outline", {
-        y: 100,
+        y: 120,
         opacity: 0,
-        duration: 1,
-        stagger: 0.1,
+        rotationX: -45,
+        transformOrigin: "bottom center",
+        duration: 1.2,
+        stagger: 0.15,
         ease: "power4.out",
         delay: 0.2
       })
@@ -51,14 +67,26 @@ import Footer from '../components/Footer.astro';
         opacity: 0,
         duration: 1,
         ease: "power3.out"
-      }, "-=0.5")
+      }, "-=0.6")
       .from(".greeting, .hero-bottom, .hero-actions", {
-        y: 20,
+        y: 30,
         opacity: 0,
-        duration: 0.8,
+        duration: 1,
         stagger: 0.1,
-        ease: "power2.out"
-      }, "-=0.5");
+        ease: "power3.out"
+      }, "-=0.8");
+
+      // Parallax for Hero text
+      gsap.to(".title-container", {
+        y: 150,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true
+        }
+      });
 
       // About Animations
       gsap.from(".huge-text", {
@@ -148,6 +176,29 @@ import Footer from '../components/Footer.astro';
           ease: "power2.out"
         });
       });
+
+      // Water Wave / Ripple Effect for Buttons
+      document.querySelectorAll('.btn').forEach((button: any) => {
+        button.addEventListener('click', function(e: MouseEvent) {
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const ripple = document.createElement('span');
+          ripple.classList.add('ripple');
+          
+          const size = Math.max(this.clientWidth, this.clientHeight);
+          ripple.style.width = ripple.style.height = `${size}px`;
+          ripple.style.left = `${x - size/2}px`;
+          ripple.style.top = `${y - size/2}px`;
+          
+          this.appendChild(ripple);
+          
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
     </script>
   </body>
 </html>
@@ -156,5 +207,6 @@ import Footer from '../components/Footer.astro';
   .portfolio-main {
     width: 100%;
     overflow-x: hidden;
+    margin-top: 0;
   }
 </style>

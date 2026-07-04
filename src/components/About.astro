@@ -5,6 +5,9 @@
     
     <div class="about-left">
       <h2 class="huge-text">Passionate about clean code & design.</h2>
+      <div class="about-image-wrapper">
+        <img src="/st.png" alt="Decorative tree art" class="about-image" />
+      </div>
     </div>
 
     <div class="about-right">
@@ -63,6 +66,32 @@
     line-height: 1.1;
     letter-spacing: -0.03em;
     margin: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .about-image-wrapper {
+    margin-top: 3rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  .about-image {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
+    animation: float-simple 6s ease-in-out infinite;
+  }
+
+  @keyframes float-simple {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
   }
 
   .about-right {
